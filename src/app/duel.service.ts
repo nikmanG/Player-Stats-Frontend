@@ -11,7 +11,7 @@ import { Duelist } from './models/duelist'
 })
 export class DuelService {
 
-  private serverUrl = 'http://localhost:8080/duel/all/0';
+  private serverUrl = 'http://localhost:8080/duel/all';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
