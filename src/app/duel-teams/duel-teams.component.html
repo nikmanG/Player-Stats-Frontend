@@ -1,13 +1,8 @@
-<div class="mat-elevation-z8 app-duelers">
+<div class="mat-elevation-z8">
   <table mat-table class="full-width-table" matSort aria-label="Elements">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-      <td mat-cell *matCellDef="let row"><img src="https://crafatar.com/avatars/{{row.player.uuid}}?size=32"></td>
-    </ng-container>
-
-    <ng-container matColumnDef="uuid">
+    <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let row">{{row.player.name}}</td>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="wins">
@@ -20,11 +15,6 @@
       <td mat-cell *matCellDef="let row">{{row.losses}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="elo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Elo</th>
-      <td mat-cell *matCellDef="let row">{{row.elo}}</td>
-    </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
@@ -32,7 +22,7 @@
   <mat-paginator #paginator
       [length]="dataSource?.data.length"
       [pageIndex]="0"
-      [pageSize]="10"
-      [pageSizeOptions]="[10, 25, 50, 100, 250]">
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 100, 250]">
   </mat-paginator>
 </div>

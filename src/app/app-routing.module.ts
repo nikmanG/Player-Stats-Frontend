@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes, Router } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { DuelersComponent }  from './duelers/duelers.component'
+import { DuelComponent }  from './duel/duel.component'
 import { QuidditchComponent } from './quidditch/quidditch.component';
 
 const routes: Routes = [
-  { path: 'duelers', component: DuelersComponent },
+  { path: 'duelers', component: DuelComponent },
   { path: 'quidditch', component: QuidditchComponent },
   { path: '**', redirectTo: 'duelers', pathMatch: 'full' }
 ];

@@ -6,8 +6,8 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="duelers">Duel</a>
-      <a mat-list-item href="quidditch">Quidditch</a>
+      <a mat-list-item routerLink="/duelers" routerLinkActive="active">Duel</a>
+      <a mat-list-item routerLink="/quidditch" routerLinkActive="active">Quidditch</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -23,8 +23,8 @@
       <span id="web-name">DA Player Stats</span>
       <span class="spacer"></span>
       <div [ngClass]="{hidden: (isHandset$ | async)}">
-        <a mat-list-item href="duelers">Duel</a>
-        <a mat-list-item href="quidditch">Quidditch</a>
+        <a mat-list-item routerLink="/duelers" routerLinkActive="active">Duel</a>
+        <a mat-list-item routerLink="/quidditch" routerLinkActive="active">Quidditch</a>
       </div>
     </mat-toolbar>
     <ng-content></ng-content>
