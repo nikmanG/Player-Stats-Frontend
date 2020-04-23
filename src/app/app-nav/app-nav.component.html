@@ -22,8 +22,10 @@
       </button>
       <span id="web-name">DA Duel Stats</span>
       <span class="spacer"></span>
-      <a mat-list-item href="#">Duel</a>
-      <a mat-list-item href="#">Quidditch</a>
+      <div [ngClass]="{hidden: (isHandset$ | async)}">
+        <a mat-list-item href="#">Duel</a>
+        <a mat-list-item href="#">Quidditch</a>
+      </div>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
