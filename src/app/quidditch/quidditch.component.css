@@ -1,0 +1,42 @@
+.app-quidditch{
+  width: 80%;
+  margin: 20px auto;
+}
+
+.full-width-table {
+  width: 100%;
+  background: #191919;
+}
+
+td, th {
+  border-bottom-color: rgb(121, 121, 121); 
+}
+
+td {
+  color: #EAE56C;
+}
+
+th {
+  color: #E9AD2F;
+}
+
+.mat-paginator {
+  background: #191919;
+  color: #E9AD2F;
+}
+
+.mat-paginator-page-size {
+  color: #E9AD2F;
+}
+
+.mat-select-value-text {
+  color: #E9AD2F;
+}
+
+/deep/ .mat-select-value-text {
+  color: #E9AD2F;
+}
+
+/deep/ .mat-select-arrow {
+  color: #E9AD2F;
+}
