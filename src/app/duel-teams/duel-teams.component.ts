@@ -18,7 +18,6 @@ export class DuelTeamsComponent implements AfterContentInit, AfterViewInit {
   @ViewChild(MatTable) table: MatTable<Team>;
   dataSource: DuelTeamsDataSource;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['name', 'wins', 'losses'];
   data: any;
   cd: ChangeDetectorRef

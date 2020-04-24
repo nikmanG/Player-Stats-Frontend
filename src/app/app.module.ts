@@ -23,6 +23,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { QuidditchComponent } from './quidditch/quidditch.component';
 import { DuelComponent } from './duel/duel.component';
 import { DuelTeamsComponent } from './duel-teams/duel-teams.component';
+import { TeamComponent } from './team/team.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,8 @@ import { DuelTeamsComponent } from './duel-teams/duel-teams.component';
     AppNavComponent,
     QuidditchComponent,
     DuelComponent,
-    DuelTeamsComponent
+    DuelTeamsComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,10 @@ import { DuelTeamsComponent } from './duel-teams/duel-teams.component';
     MatIconModule,
     MatListModule,
     AppRoutingModule,
-    MatTabsModule
+    MatTabsModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
