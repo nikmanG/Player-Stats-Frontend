@@ -3,6 +3,8 @@
 }
 
 .dashboard-card {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 15px;
   left: 15px;
@@ -39,11 +41,15 @@ ul {
 }
 
 .win {
-  color: green;
+  color: lime;
 }
 
 .lose {
   color: red;
+}
+
+.neutral {
+  color: #EAE56C;
 }
 
 .match-result {
@@ -58,7 +64,57 @@ ul {
   padding:0 !important;
 }
 
-::ng-deep .mat-card-content{
-  background-color:#4a4443 !important;
-  padding:5px !important;
+::ng-deep .mat-table {
+  background: none;
+}
+
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+
+mat-card {
+  background-color: #191919;
+}
+
+mat-divider {
+  background-color: #5e5e5e;
+  position: relative !important;
+}
+
+table {
+  width: 100%;
+}
+
+/deep/ .mat-header-cell {
+  color: #5e5e5e;
+  text-align: center !important;
+}
+
+td {
+  text-align: center;
+}
+
+.mat-elevation-z8 {
+  text-align: left;
+}
+
+h1 {
+  color: #EAE56C;
+}
+
+mat-card-content {
+  margin-top: 10px;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.left-orient {
+  padding-left: 0% !important;
+}
+
+.right-orient {
+  justify-content: right;
 }

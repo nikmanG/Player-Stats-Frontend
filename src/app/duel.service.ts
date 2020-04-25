@@ -15,6 +15,7 @@ export class DuelService {
 
   private serverDuelistUrl = 'http://localhost:8080/duel/all';
   private serverTeamUrl = 'http://localhost:8080/duel/all_teams';
+  private serverDuelistByIdUrl = 'http://localhost:8080/duel/find/'
   private serverMatchHistoryUrl = 'http://localhost:8080/duel/history?id=';
 
   private duelistData$: Observable<Duelist[]>;
@@ -38,6 +39,13 @@ export class DuelService {
 
   getDuelists(): Observable<Duelist[]> {
     return this.duelistData$;
+  }
+
+  getDuelist(id: number): Observable<Duelist> {
+    return this.http.get<Duelist>(this.serverDuelistByIdUrl + id)
+    .pipe(
+      tap(_ => console.log('fetched individual with id ' + id)),
+      catchError(this.handleError<Duelist>('getDuelist', null)));
   }
 
   getTeams(): Observable<Team[]> {

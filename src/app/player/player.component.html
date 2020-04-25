@@ -1,6 +1,7 @@
 <div class="grid-container">
   <h1 class="mat-h1">Individual Player Stats</h1>
   <mat-grid-list cols="3" rowHeight="350px">
+    <!--Image Card-->
     <mat-grid-tile [colspan]="userCard?.cols" [rowspan]="userCard?.rows">
       <mat-card class="dashboard-card">
         <mat-card-header>
@@ -8,30 +9,84 @@
             {{name}}
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
+        <mat-divider></mat-divider>
+        <mat-card-content class="dashboard-card-content" [style.overflow]="'auto'">
           <div><img src="https://crafatar.com/renders/body/{{userCard?.uuid}}"></div>
+          <mat-divider></mat-divider>
+          <table mat-table [dataSource]="duelistCard?.info" class="mat-elevation-z8">
+            <ng-container matColumnDef="Statistic">
+              <th mat-header-cell class="left-orient" *matHeaderCellDef> Dueling </th>
+              <td mat-cell class="neutral left-orient" *matCellDef="let info">{{info.key}}</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="Value">
+              <th mat-header-cell class="right-orient" *matHeaderCellDef>  </th>
+              <td mat-cell class="neutral right-orient" *matCellDef="let info"><strong>{{info.value}}</strong></td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="statisticColums"></tr>
+            <tr mat-row *matRowDef="let row; columns: statisticColums;"></tr>
+          </table>
+          <table mat-table [dataSource]="duelistCard?.info" class="mat-elevation-z8">
+            <ng-container matColumnDef="Statistic">
+              <th mat-header-cell class="left-orient" *matHeaderCellDef> Quidditch </th>
+              <td mat-cell class="neutral left-orient" *matCellDef="let info">{{info.key}}</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="Value">
+              <th mat-header-cell class="right-orient" *matHeaderCellDef>  </th>
+              <td mat-cell class="neutral right-orient" *matCellDef="let info"><strong>{{info.value}}</strong></td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="statisticColums"></tr>
+            <tr mat-row *matRowDef="let row; columns: statisticColums;"></tr>
+          </table>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
 
-    <mat-grid-tile [colspan]="userCard?.cols" [rowspan]="userCard?.rows">
+    <!--Match History Card-->
+    <mat-grid-tile [colspan]="matchCard?.cols" [rowspan]="matchCard?.rows">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
             Duel Match History
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content" [style.overflow]="'auto'" [style.height.px]="'300'">
-          <ul>
-            <li *ngFor="let match of matchCard?.matches">
-              <div [ngClass]="(match.winner.id == id) ? 'win' : 'lose'" class='match-result'>
-                WINNER:
-                <img src="https://crafatar.com/avatars/{{match.winner.uuid}}?size=16"> ({{match.oldWinnerElo}} >> {{match.newWinnerElo}}) -
-                LOSER:
-                <img src="https://crafatar.com/avatars/{{match.loser.uuid}}?size=16"> ({{match.oldLoserElo}} >> {{match.newLoserElo}})
-              </div>
-            </li>
-          </ul>
+        <mat-divider></mat-divider>
+        <mat-card-content class="dashboard-card-content" [style.overflow]="'auto'">
+          <table mat-table [dataSource]="matchCard?.matches" class="mat-elevation-z8">
+            <ng-container matColumnDef="Winner">
+              <th mat-header-cell *matHeaderCellDef> Winner </th>
+              <td mat-cell *matCellDef="let match" [ngClass]="(match.winner.id == id) ? 'win' : 'lose'"> 
+                <a routerLink="/player/{{match.winner.id}}" class="mat-row-link">
+                  <img src="https://crafatar.com/avatars/{{match.winner.uuid}}?size=16"> {{match.winner.name}}
+                </a> 
+              </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="Winner Elo">
+              <th mat-header-cell *matHeaderCellDef> Winner Elo </th>
+              <td mat-cell *matCellDef="let match" [ngClass]="(match.winner.id == id) ? 'win' : 'lose'"> ({{match.oldWinnerElo}} >> {{match.newWinnerElo}}) </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="Loser">
+              <th mat-header-cell *matHeaderCellDef> Loser </th>
+              <td mat-cell *matCellDef="let match" [ngClass]="(match.winner.id == id) ? 'win' : 'lose'"> 
+                <a routerLink="/player/{{match.loser.id}}" class="mat-row-link">
+                  {{match.loser.name}} <img src="https://crafatar.com/avatars/{{match.loser.uuid}}?size=16">
+                </a> 
+              </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="Loser Elo">
+              <th mat-header-cell *matHeaderCellDef> Loser Elo </th>
+              <td mat-cell *matCellDef="let match" [ngClass]="(match.winner.id == id) ? 'win' : 'lose'"> ({{match.oldLoserElo}} >> {{match.newLoserElo}}) </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

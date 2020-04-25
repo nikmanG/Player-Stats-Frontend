@@ -21,8 +21,12 @@ export class PlayerComponent {
 
   userCard: any;
   matchCard: any;
+  duelistCard: any;
   name: string;
   id: number;
+
+  displayedColumns: string[] = ['Winner', 'Winner Elo', 'Loser Elo', 'Loser'];
+  statisticColums: string[] = ['Statistic', 'Value'];
 
   constructor(
     private breakpointObserver: BreakpointObserver, 
@@ -36,14 +40,28 @@ export class PlayerComponent {
       this.playerService.getPlayer(params['id']).subscribe(t => {
         this.id = params['id'];
         this.name = t.name;
-        this.userCard = {uuid: t.uuid, cols: 1, rows: 1};
+        this.userCard = {uuid: t.uuid, cols: 1, rows: 2};
+      });
+
+      this.duelService.getDuelist(params['id']).subscribe(t => {
+        this.duelistCard = {info: this.formatDuelistToSingleArray(t), cols: 1, rows: 1};
+
       });
 
       this.duelService.getMatchHistory(params['id'], false).subscribe(t => {
         this.matchCard = {matches: t, cols: 2, rows: 1};
-      })
+      });
     });
 
     this.cd.detectChanges();
+  }
+
+  formatDuelistToSingleArray(value) {
+    return [
+      {key: 'Elo', value: value.elo},
+      {key: 'Wins', value: value.wins},
+      {key: 'Losses', value: value.losses},
+      {key: 'Total Matches', value: value.wins + value.losses}
+  ]
   }
 }

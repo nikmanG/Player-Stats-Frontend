@@ -18,3 +18,23 @@ h1 {
   display:flex;
   justify-content:center;
 }
+
+.mat-card {
+  background-color: #191919;
+}
+
+mat-card-title {
+  color: #E9AD2F;
+}
+
+mat-divider {
+  background-color: #5e5e5e;
+}
+
+mat-card-content {
+  margin: 10px;
+}
+
+h1 {
+  color: #EAE56C;
+}
