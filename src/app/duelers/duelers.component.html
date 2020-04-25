@@ -2,7 +2,7 @@
   <table mat-table class="full-width-table" matSort aria-label="Elements">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-      <td mat-cell *matCellDef="let row"><img src="https://crafatar.com/avatars/{{row.player.uuid}}?size=32"></td>
+      <td mat-cell *matCellDef="let row"><img src="https://crafatar.com/avatars/{{row.player.uuid}}?size=32"><a routerLink="/player/{{row.player.id}}" class="mat-row-link"></a></td>
     </ng-container>
 
     <ng-container matColumnDef="uuid">

@@ -27,6 +27,7 @@ import { TeamComponent } from './team/team.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { PlayerComponent } from './player/player.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatMenuModule } from '@angular/material/menu';
     QuidditchComponent,
     DuelComponent,
     DuelTeamsComponent,
-    TeamComponent
+    TeamComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,

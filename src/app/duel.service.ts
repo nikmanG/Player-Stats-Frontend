@@ -6,6 +6,7 @@ import { catchError, tap, publishReplay, refCount } from 'rxjs/operators';
 
 import { Duelist } from './models/duelist'
 import { Team } from './models/team'
+import { DuelMatch } from './models/duel-match';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,11 @@ export class DuelService {
 
   private serverDuelistUrl = 'http://localhost:8080/duel/all';
   private serverTeamUrl = 'http://localhost:8080/duel/all_teams';
+  private serverMatchHistoryUrl = 'http://localhost:8080/duel/history?id=';
 
   private duelistData$: Observable<Duelist[]>;
   private teamData$: Observable<Team[]>;
-
+  
   constructor(private http: HttpClient) { 
     this.duelistData$ = this.http.get<Duelist[]>(this.serverDuelistUrl)
       .pipe(
@@ -39,7 +41,14 @@ export class DuelService {
   }
 
   getTeams(): Observable<Team[]> {
-      return this.teamData$;
+    return this.teamData$;
+  }
+
+  getMatchHistory(id: number, winsOnly: boolean): Observable<DuelMatch[]> {
+    return this.http.get<DuelMatch[]>(this.serverMatchHistoryUrl + id + "&winsOnly=" + winsOnly)
+      .pipe(
+        tap(_ => console.log('fetched duel match list for ' + id)),
+        catchError(this.handleError<DuelMatch[]>('getMatchHistory', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

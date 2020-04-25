@@ -1,0 +1,39 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Individual Player Stats</h1>
+  <mat-grid-list cols="3" rowHeight="350px">
+    <mat-grid-tile [colspan]="userCard?.cols" [rowspan]="userCard?.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{name}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div><img src="https://crafatar.com/renders/body/{{userCard?.uuid}}"></div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="userCard?.cols" [rowspan]="userCard?.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Duel Match History
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content" [style.overflow]="'auto'" [style.height.px]="'300'">
+          <ul>
+            <li *ngFor="let match of matchCard?.matches">
+              <div [ngClass]="(match.winner.id == id) ? 'win' : 'lose'" class='match-result'>
+                WINNER:
+                <img src="https://crafatar.com/avatars/{{match.winner.uuid}}?size=16"> ({{match.oldWinnerElo}} >> {{match.newWinnerElo}}) -
+                LOSER:
+                <img src="https://crafatar.com/avatars/{{match.loser.uuid}}?size=16"> ({{match.oldLoserElo}} >> {{match.newLoserElo}})
+              </div>
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

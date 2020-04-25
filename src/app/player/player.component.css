@@ -1,0 +1,64 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+
+h1 {
+  display:flex;
+  justify-content:center;
+}
+
+ul {
+  list-style-type:none;
+  font-size: medium;
+}
+
+/deep/ .mat-card-header-text {
+  color: #E9AD2F;
+}
+
+.mat-card-header .mat-card-title {
+  font-size: 25px;
+}
+
+.win {
+  color: green;
+}
+
+.lose {
+  color: red;
+}
+
+.match-result {
+  margin: 5px
+}
+
+::ng-deep .mat-card-header{
+  padding:5px !important;
+}
+
+::ng-deep .mat-card{
+  padding:0 !important;
+}
+
+::ng-deep .mat-card-content{
+  background-color:#4a4443 !important;
+  padding:5px !important;
+}

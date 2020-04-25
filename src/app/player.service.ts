@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
+import { Player } from './models/player';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { Team } from './models/team'
-
 @Injectable({
   providedIn: 'root'
 })
-export class TeamService {
-  private individualTeamUrl = "http://localhost:8080/team/find/";
+export class PlayerService {
+  private playerUrl = "http://localhost:8080/player/find/";
 
   constructor(private http: HttpClient) { }
 
-  getTeam(id: number): Observable<Team> {
-    return this.http.get<Team>(this.individualTeamUrl + id)
+  getPlayer(id: number): Observable<Player> {
+    return this.http.get<Player>(this.playerUrl + id)
     .pipe(
-      tap(_ => console.log('fetched team with id ' + id)),
-      catchError(this.handleError<Team>('getTeam', null)));
+      tap(_ => console.log('fetched player with id ' + id)),
+      catchError(this.handleError<Player>('getPlayer', null)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
