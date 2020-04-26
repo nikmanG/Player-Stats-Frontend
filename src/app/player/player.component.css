@@ -118,3 +118,7 @@ a {
 .right-orient {
   justify-content: right;
 }
+
+/deep/ .mat-tab-label {
+  color: fuchsia;
+}

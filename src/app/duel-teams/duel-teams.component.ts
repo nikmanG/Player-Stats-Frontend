@@ -18,7 +18,7 @@ export class DuelTeamsComponent implements AfterContentInit, AfterViewInit {
   @ViewChild(MatTable) table: MatTable<Team>;
   dataSource: DuelTeamsDataSource;
 
-  displayedColumns = ['name', 'wins', 'losses'];
+  displayedColumns = ['logo', 'name', 'wins', 'losses'];
   data: any;
   cd: ChangeDetectorRef
 

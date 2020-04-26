@@ -10,15 +10,22 @@ import { Team } from './models/team'
   providedIn: 'root'
 })
 export class TeamService {
-  private individualTeamUrl = "http://localhost:8080/team/find/";
+  private individualTeamUrl = "http://localhost:8080/team/";
 
   constructor(private http: HttpClient) { }
 
   getTeam(id: number): Observable<Team> {
-    return this.http.get<Team>(this.individualTeamUrl + id)
+    return this.http.get<Team>(this.individualTeamUrl + "find/" + id)
     .pipe(
       tap(_ => console.log('fetched team with id ' + id)),
       catchError(this.handleError<Team>('getTeam', null)));
+  }
+
+  getTeamsForPlayer(id: number): Observable<{[type: string]: Team}> {
+    return this.http.get<{[type: string]: Team}>(this.individualTeamUrl + "player/" + id)
+    .pipe(
+      tap(_ => console.log('fetched teams for player id ' + id)),
+      catchError(this.handleError<{[type: string]: Team}>('getTeamForPlayer', null)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

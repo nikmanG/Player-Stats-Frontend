@@ -52,3 +52,10 @@ th {
   left: 0;
   top: 0;             
 }
+
+img {
+  width: 32px;
+  height: 32px;
+  /* margin-top: 2px;
+  margin-bottom: 2px; */
+}
