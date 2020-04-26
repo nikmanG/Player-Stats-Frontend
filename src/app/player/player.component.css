@@ -122,3 +122,8 @@ a {
 /deep/ .mat-tab-label {
   color: fuchsia;
 }
+
+.match-result-img {
+  width: 16px;
+  height: 16px;
+}

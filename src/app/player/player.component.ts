@@ -6,6 +6,9 @@ import { PlayerService } from '../player.service';
 import { ActivatedRoute } from '@angular/router';
 import { DuelService } from '../duel.service';
 import { TeamService } from '../team.service';
+import { QuidditchService } from '../quidditch.service';
+import { Team } from '../models/team';
+import { QuidditchTeam } from '../models/quidditch-team';
 
 @Component({
   selector: 'app-player',
@@ -32,16 +35,18 @@ export class PlayerComponent {
   quidditchTeamName: string;
   name: string;
   id: number;
+  teamId: number;
 
   displayedColumns: string[] = ['Winner', 'Winner Elo', 'Loser Elo', 'Loser'];
   statisticColums: string[] = ['Statistic', 'Value'];
-
+  quidditchColumns: string[] = ['Winner', 'Winner Score', 'Snitch Catcher', 'Loser Score', 'Loser']
   constructor(
     private breakpointObserver: BreakpointObserver, 
     private route: ActivatedRoute, 
     private playerService: PlayerService,
     private duelService: DuelService,
     private teamService: TeamService,
+    private quidditchService: QuidditchService,
     private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
@@ -58,15 +63,26 @@ export class PlayerComponent {
       });
 
       this.teamService.getTeamsForPlayer(params['id']).subscribe(t => {
-        this.teamCard = {duel: this.formatTeamToSingArray(t.DUEL), quidditch: this.formatTeamToSingArray(t.QUIDDITCH)}
+        this.teamCard = {duel: this.formatTeamToSingleArray(t.DUEL)}
         
+        if(t.QUIDDITCH) {
+          this.quidditchService.getTeam(t.QUIDDITCH.id).subscribe(t2 => {
+            this.teamId = t2.id;
+            this.teamCard['quidditch'] = this.enrichTeamArray(t.QUIDDITCH, t2);
+          });
+
+          this.quidditchService.getMatches(t.QUIDDITCH.id).subscribe(t2 => {
+            this.quidditchMatchCard = {matches: t2, cols: 2, rows: 1};
+            console.log(t2);
+          })
+        }
+
         this.duelTeamName = t.DUEL?.name;
         this.quidditchTeamName = t.QUIDDITCH?.name;
       })
 
       this.duelService.getMatchHistory(params['id'], false).subscribe(t => {
         this.duelMatchCard = {matches: t, cols: 2, rows: 1};
-        this.quidditchMatchCard = this.duelMatchCard;
       });
     });
 
@@ -81,7 +97,7 @@ export class PlayerComponent {
       {key: 'Total Matches', value: value.wins + value.losses}]
   }
 
-  formatTeamToSingArray(value) {
+  formatTeamToSingleArray(value) {
     if(!value)
       return null;
 
@@ -90,5 +106,18 @@ export class PlayerComponent {
       {key: 'Wins', value: value.wins},
       {key: 'Losses', value: value.losses},
       {key: 'Total Matches', value: value.wins + value.losses}]
+  }
+
+  enrichTeamArray(team: Team, qTeam: QuidditchTeam) {
+
+    return [
+      {key: 'Team Name', value: team.name},
+      {key: 'Wins', value: team.wins},
+      {key: 'Losses', value: team.losses},
+      {key: 'Scored Points', value: qTeam.pointsFor},
+      {key: 'Conceded Points', value: qTeam.pointsAgainst},
+      {key: 'Net Points', value: qTeam.pointsFor - qTeam.pointsAgainst},
+      {key: 'Total Matches', value: team.wins + team.losses}
+    ]
   }
 }

@@ -1,15 +1,38 @@
 <div class="mat-elevation-z8 app-quidditch">
   <table mat-table class="full-width-table" matSort aria-label="Elements">
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    <ng-container matColumnDef="logo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row"><img src="{{row.team.logoUrl}}"><a routerLink="/team/{{row.id}}" class="mat-row-link"></a></td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+      <td mat-cell *matCellDef="let row">{{row.team.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="wins">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Wins</th>
+      <td mat-cell *matCellDef="let row">{{row.team.wins}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="losses">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Losses</th>
+      <td mat-cell *matCellDef="let row">{{row.team.losses}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="pointsFor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Points For</th>
+      <td mat-cell *matCellDef="let row">{{row.pointsFor}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="pointsAgainst">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Points Against</th>
+      <td mat-cell *matCellDef="let row">{{row.pointsAgainst}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="netPoints">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Net Points</th>
+      <td mat-cell *matCellDef="let row" [ngClass]="row.pointsFor - row.pointsAgainst >= 0 ? 'up' : 'down'">{{row.pointsFor - row.pointsAgainst}}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -20,6 +43,6 @@
       [length]="dataSource?.data.length"
       [pageIndex]="0"
       [pageSize]="50"
-      [pageSizeOptions]="[25, 50, 100, 250]">
+      [pageSizeOptions]="[10, 25, 50, 100, 250]">
   </mat-paginator>
 </div>
