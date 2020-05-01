@@ -10,7 +10,7 @@ import { Team } from './models/team'
   providedIn: 'root'
 })
 export class TeamService {
-  private individualTeamUrl = "http://localhost:8080/team/";
+  private individualTeamUrl = window["restServer"] + "team/public/";
 
   constructor(private http: HttpClient) { }
 

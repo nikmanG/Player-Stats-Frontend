@@ -9,7 +9,7 @@ import { QuidditchMatch } from './models/quidditch-match';
   providedIn: 'root'
 })
 export class QuidditchService {
-  private quidditchUrl = "http://localhost:8080/quidditch/";
+  private quidditchUrl = window["restServer"] + "quidditch/public/";
 
   private quidditchData$ = this.http.get<QuidditchTeam[]>(this.quidditchUrl + "all")
   .pipe(

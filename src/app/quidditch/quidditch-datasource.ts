@@ -69,7 +69,7 @@ export class QuidditchDataSource extends DataSource<QuidditchTeam> {
         case 'losses': return compare(a.team.losses, b.team.losses, isAsc);
         case 'pointsFor': return compare(a.pointsFor, b.pointsFor, isAsc);
         case 'pointsAgainst': return compare(a.pointsAgainst, b.pointsAgainst, isAsc);
-        case 'netPoints': return compare(a.pointsFor - a.pointsAgainst, b.pointsAgainst - b.pointsAgainst, isAsc);
+        case 'netPoints': return compare(a.pointsFor - a.pointsAgainst, b.pointsFor - b.pointsAgainst, isAsc);
         
         default: return 0;
       }

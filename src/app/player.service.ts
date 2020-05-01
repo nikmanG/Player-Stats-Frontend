@@ -9,7 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PlayerService {
-  private playerUrl = "http://localhost:8080/player/find/";
+  private playerUrl = window["restServer"] + "player/public/find/";
 
   constructor(private http: HttpClient) { }
 

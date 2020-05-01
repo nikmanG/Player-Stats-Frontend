@@ -29,6 +29,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { PlayerComponent } from './player/player.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { PlayerComponent } from './player/player.component';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    RouterModule.forRoot(routes, {useHash: true})
   ],
   providers: [],
   bootstrap: [AppComponent]

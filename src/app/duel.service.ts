@@ -13,10 +13,11 @@ import { DuelMatch } from './models/duel-match';
 })
 export class DuelService {
 
-  private serverDuelistUrl = 'http://localhost:8080/duel/all';
-  private serverTeamUrl = 'http://localhost:8080/duel/all_teams';
-  private serverDuelistByIdUrl = 'http://localhost:8080/duel/find/'
-  private serverMatchHistoryUrl = 'http://localhost:8080/duel/history?id=';
+  private baseUrl = window["restServer"];
+  private serverDuelistUrl = this.baseUrl + 'duel/public/all';
+  private serverTeamUrl = this.baseUrl + 'duel/public/all_teams';
+  private serverDuelistByIdUrl = this.baseUrl + 'duel/public/find/'
+  private serverMatchHistoryUrl = this.baseUrl + 'duel/public/history?id=';
 
   private duelistData$: Observable<Duelist[]>;
   private teamData$: Observable<Team[]>;
