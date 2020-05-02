@@ -8,6 +8,7 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/duelers" routerLinkActive="active">Duel</a>
       <a mat-list-item routerLink="/quidditch" routerLinkActive="active">Quidditch</a>
+      <a mat-list-item routerLink="/betting" routerLinkActive="active">Bet Slip</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -25,6 +26,7 @@
       <div [ngClass]="{hidden: (isHandset$ | async)}">
         <a mat-list-item routerLink="/duelers" routerLinkActive="active">Duel</a>
         <a mat-list-item routerLink="/quidditch" routerLinkActive="active">Quidditch</a>
+        <a mat-list-item routerLink="/betting" routerLinkActive="active">Bet Slip</a>
       </div>
     </mat-toolbar>
     <ng-content></ng-content>

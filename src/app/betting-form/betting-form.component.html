@@ -1,0 +1,78 @@
+<form [formGroup]="bettingForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="betting-card">
+    <mat-card-header>
+      <mat-card-title>Knockturn Bets</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <input matInput placeholder="Your username" formControlName="name">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div formArrayName="bets">
+        <div *ngFor="let bet of bets.controls; let i=index">
+          <div class="row" [formGroupName]="i">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Match Type</mat-label>
+                <mat-select formControlName="eventType" (selectionChange)="onEventTypeChange($event)">
+                  <mat-option *ngFor="let matchType of matchTypes" [value]="matchType.value">{{ matchType.name }}</mat-option>
+                </mat-select> 
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Chosen Player/Team</mat-label>
+                <mat-select formControlName="chosen">
+                  <mat-option>
+                    <ngx-mat-select-search [formControl]="dataControl" placeholderLabel="Find Player"></ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option *ngFor="let data of filteredData | async" [value]="data.id">
+                    <img src="{{data.image}}" class="filter_image">
+                    {{ data.name }}
+                  </mat-option>  
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Chosen Opposition</mat-label>
+                <mat-select formControlName="opposing">
+                  <mat-option>
+                    <ngx-mat-select-search [formControl]="dataControl" placeholderLabel="Find Player"></ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option *ngFor="let data of filteredData | async" [value]="data.id">
+                    <img src="{{data.image}}" class="filter_image">
+                    {{ data.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field><input matInput type="number" placeholder="Galleons Bet" formControlName="galleons"></mat-form-field>
+            </div>
+            <div class="col">
+              <button mat-raised-button color="warn" type="button" (click)="removeBettingRow(i)">Remove Bet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="accent" type="button" (click)="addBettingRow()">Add Bet</button>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<div style="color: white">
+  {{ bettingForm.value | json }}
+</div>
