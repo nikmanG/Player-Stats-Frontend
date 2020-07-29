@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, AfterContentInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { OnInit, AfterViewInit, Component, AfterContentInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
@@ -12,6 +12,7 @@ import { QuidditchTeam } from '../models/quidditch-team';
   styleUrls: ['./quidditch.component.css']
 })
 export class QuidditchComponent implements AfterViewInit, AfterContentInit {
+  @Input() leagueId: number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<QuidditchTeam>;
@@ -23,12 +24,16 @@ export class QuidditchComponent implements AfterViewInit, AfterContentInit {
   cd: ChangeDetectorRef;
 
   constructor(quidditchService: QuidditchService, cd: ChangeDetectorRef) {
-    this.data = quidditchService.getTeams();
+    this.data = quidditchService
     this.cd = cd;
   }
 
+  // ngOnInit() {
+  //   this.leagueId = 
+  // }
+
   ngAfterViewInit() {
-    this.data.subscribe(teams => {
+    this.data.getTeamsForLeague(this.leagueId).subscribe(teams => {
       this.dataSource.data = teams;
       console.log(teams);
       this.dataSource.sort = this.sort;

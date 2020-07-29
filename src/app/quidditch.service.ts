@@ -24,6 +24,13 @@ export class QuidditchService {
       return this.quidditchData$;
   }
 
+  getTeamsForLeague(leagueId: number): Observable<QuidditchTeam[]> {
+    return this.http.get<QuidditchTeam[]>(this.quidditchUrl + "league?leagueId=" + leagueId)
+    .pipe(
+      tap(_ => console.log('fetched quidditch teams for league id ' + leagueId)),
+      catchError(this.handleError<QuidditchTeam[]>('getTeamsForLeague', [])));
+  }
+
   getTeam(id: number): Observable<QuidditchTeam> {
     return this.http.get<QuidditchTeam>(this.quidditchUrl + "find/" + id)
     .pipe(

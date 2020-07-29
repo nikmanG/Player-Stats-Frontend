@@ -29,12 +29,12 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { PlayerComponent } from './player/player.component';
-import { BettingFormComponent } from './betting-form/betting-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { QuidditchLeaguesComponent } from './quidditch-leagues/quidditch-leagues.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     DuelTeamsComponent,
     TeamComponent,
     PlayerComponent,
-    BettingFormComponent
+    QuidditchLeaguesComponent
   ],
   imports: [
     BrowserModule,

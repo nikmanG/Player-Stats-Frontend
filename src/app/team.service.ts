@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Team } from './models/team'
+import { League } from './models/league';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,13 @@ export class TeamService {
     .pipe(
       tap(_ => console.log('fetched teams for player id ' + id)),
       catchError(this.handleError<{[type: string]: Team}>('getTeamForPlayer', null)));
+  }
+
+  getLeaguesForType(type: string): Observable<League[]> {
+    return this.http.get<League[]>(this.individualTeamUrl + "get_leagues?type=" + type)
+    .pipe(
+      tap(_ => console.log('fetched leagues for type ' + type)),
+      catchError(this.handleError<League[]>('getLeaguesForType', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
